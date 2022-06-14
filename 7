@@ -1,0 +1,61 @@
+
+MariaDB [devika]>  create table customer(c_id int,c_name varchar(20),salary int);
+Query OK, 0 rows affected (0.25 sec)
+
+MariaDB [devika]>  start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [devika]>  set autocommit=0;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [devika]> insert into customer values(1,'devika',55000),(2,'gopika',55000);
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [devika]> commit;
+Query OK, 0 rows affected (0.44 sec)
+MariaDB [devika]>delete from customer where c_id=2;
+Query OK, 1 row affected (0.00 sec)
+MariaDB [devika]>rollback;
+
+MariaDB [devika]> select * from customer;
++------+--------+--------+
+| c_id | c_name | salary |
++------+--------+--------+
+|    1 | devika |  55000 |
+|    2 | gopika |  55000 |
++------+--------+--------+
+2 rows in set (0.00 sec)
+insert into customer values(3,'gopika',55000);
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [devika]> savepoint sp1;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [devika]> delete from customer where c_id=3;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [devika]>  select * from customer;
++------+--------+--------+
+| c_id | c_name | salary |
++------+--------+--------+
+|    1 | devika |  55000 |
+|    2 | gopika |  55000 |
++------+--------+--------+
+2 rows in set (0.01 sec)
+
+MariaDB [devika]> rollback to sp1;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [devika]>  select * from customer;
++------+--------+--------+
+| c_id | c_name | salary |
++------+--------+--------+
+|    1 | devika |  55000 |
+|    2 | gopika |  55000 |
+|    3 | gopika |  55000 |
++------+--------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [devika]> 
+

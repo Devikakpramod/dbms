@@ -1,0 +1,81 @@
+create table empl(empno int,empname varchar(20),designation varchar(20),salary int,DOB int,deptno int);
+Query OK, 0 rows affected (0.64 sec)
+
+MariaDB [devika]> insert into empl values(1,'vineeth','supervisor',15000,1997-2-15,6),(2,'asokh','manager',35000,1995-10-15,6),(3,'radhika','CEO',50000,1990-12-15,5),(4,'navya','employee',10000,2000-12-14,6),(5,'megha','employee',5000,1999-10-11);
+ERROR 1136 (21S01): Column count doesn't match value count at row 5
+MariaDB [devika]> insert into empl values(1,'vineeth','supervisor',15000,1997-2-15,6),(2,'asokh','manager',35000,1995-10-15,6),(3,'radhika','CEO',50000,1990-12-15,5),(4,'navya','employee',10000,2000-12-14,6),(5,'megha','employee',5000,1999-10-11);
+ERROR 1136 (21S01): Column count doesn't match value count at row 5
+MariaDB [devika]>  insert into empl values(1,'vineeth','supervisor',15000,1997-2-15,6),(2,'asokh','manager',35000,1995-10-15,6),(3,'radhika','CEO',50000,1990-12-15,5),(4,'navya','employee',10000,2000-12-14,6),(5,'megha','employee',5000,1999-10-11,4);
+Query OK, 5 rows affected (0.04 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [devika]> select * from empl;
++-------+---------+-------------+--------+------+--------+
+| empno | empname | designation | salary | DOB  | deptno |
++-------+---------+-------------+--------+------+--------+
+|     1 | vineeth | supervisor  |  15000 | 1980 |      6 |
+|     2 | asokh   | manager     |  35000 | 1970 |      6 |
+|     3 | radhika | CEO         |  50000 | 1963 |      5 |
+|     4 | navya   | employee    |  10000 | 1974 |      6 |
+|     5 | megha   | employee    |   5000 | 1978 |      4 |
++-------+---------+-------------+--------+------+--------+
+5 rows in set (0.00 sec)
+
+MariaDB [devika]> select * from empl where salary>10000;
++-------+---------+-------------+--------+------+--------+
+| empno | empname | designation | salary | DOB  | deptno |
++-------+---------+-------------+--------+------+--------+
+|     1 | vineeth | supervisor  |  15000 | 1980 |      6 |
+|     2 | asokh   | manager     |  35000 | 1970 |      6 |
+|     3 | radhika | CEO         |  50000 | 1963 |      5 |
++-------+---------+-------------+--------+------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [devika]> delete from empl where deptno=6;
+Query OK, 3 rows affected (0.05 sec)
+
+MariaDB [devika]> select * from empl;
++-------+---------+-------------+--------+------+--------+
+| empno | empname | designation | salary | DOB  | deptno |
++-------+---------+-------------+--------+------+--------+
+|     3 | radhika | CEO         |  50000 | 1963 |      5 |
+|     5 | megha   | employee    |   5000 | 1978 |      4 |
++-------+---------+-------------+--------+------+--------+
+2 rows in set (0.00 sec)
+
+MariaDB [devika]> update empl set salary=salary + 5000 where designation='manager';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+MariaDB [devika]> select * from empl;
++-------+---------+-------------+--------+------+--------+
+| empno | empname | designation | salary | DOB  | deptno |
++-------+---------+-------------+--------+------+--------+
+|     3 | radhika | CEO         |  50000 | 1963 |      5 |
+|     5 | megha   | employee    |   5000 | 1978 |      4 |
++-------+---------+-------------+--------+------+--------+
+2 rows in set (0.00 sec)
+
+MariaDB [devika]> select * from empl order by empname;
++-------+---------+-------------+--------+------+--------+
+| empno | empname | designation | salary | DOB  | deptno |
++-------+---------+-------------+--------+------+--------+
+|     5 | megha   | employee    |   5000 | 1978 |      4 |
+|     3 | radhika | CEO         |  50000 | 1963 |      5 |
++-------+---------+-------------+--------+------+--------+
+2 rows in set (0.00 sec)
+
+MariaDB [devika]> select * from empl;
++-------+---------+-------------+--------+------+--------+
+| empno | empname | designation | salary | DOB  | deptno |
++-------+---------+-------------+--------+------+--------+
+|     3 | radhika | CEO         |  50000 | 1963 |      5 |
+|     5 | megha   | employee    |   5000 | 1978 |      4 |
++-------+---------+-------------+--------+------+--------+
+2 rows in set (0.00 sec)
+
+MariaDB [devika]> truncate table empl;
+Query OK, 0 rows affected (0.64 sec)
+
+MariaDB [devika]> 
+
