@@ -1,0 +1,98 @@
+student@student-OptiPlex-3050:~/Desktop/devika kp$ sudo service mongod start
+[sudo] password for student: 
+student@student-OptiPlex-3050:~/Desktop/devika kp$ sudo service mongod status
+● mongod.service - MongoDB Database Server
+   Loaded: loaded (/lib/systemd/system/mongod.service; enabled; vendor preset: e
+   Active: active (running) since Tue 2022-06-14 17:14:02 IST; 1min 17s ago
+     Docs: https://docs.mongodb.org/manual
+ Main PID: 1558 (mongod)
+   CGroup: /system.slice/mongod.service
+           └─1558 /usr/bin/mongod --config /etc/mongod.conf
+
+Jun 14 17:14:02 student-OptiPlex-3050 systemd[1]: Started MongoDB Database Serve
+Jun 14 17:15:05 student-OptiPlex-3050 systemd[1]: Started MongoDB Database Serve
+
+student@student-OptiPlex-3050:~/Desktop/devika kp$ mongo
+MongoDB shell version v4.4.14
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("343ddbc6-4919-4eb0-b24f-398ef5e32c0d") }
+MongoDB server version: 4.4.14
+---
+The server generated these startup warnings when booting: 
+        2022-06-14T17:14:11.895+05:30: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+        2022-06-14T17:14:15.574+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+        2022-06-14T17:14:15.574+05:30: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
+        2022-06-14T17:14:15.574+05:30: /sys/kernel/mm/transparent_hugepage/defrag is 'always'. We suggest setting it to 'never'
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+
+
+student@student-OptiPlex-3050:~/Desktop/devika kp$ mongo --quiet;
+> show dbs;
+admin     0.000GB
+config    0.000GB
+employee  0.000GB
+local     0.000GB
+> db.Empdetails.find();
+> use employee;
+switched to db employee
+
+> db.Empdetails.update({name:"Bhuvan"},{$set:{dept:"Developer"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.Empdetails.update({name:"Mohan"},{$set:{dept:"Designer"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.Empdetails.update({name:"Manu"},{$set:{dept:"Designer"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.Empdetails.update({name:"Raju"},{$set:{dept:"Tester"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.Empdetails.update({name:"Ram"},{$set:{dept:"Tester"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.Empdetails.find()
+{ "_id" : ObjectId("62a865d35b91129c5187a592"), "name" : "Bhuvan", "age" : 30, "email" : "bhuvan@gps.com", "salary" : 5000, "dept" : "Developer" }
+{ "_id" : ObjectId("62a866185b91129c5187a593"), "name" : "Mohan", "age" : 32, "email" : "neil@gps.com", "salary" : 4000, "dept" : "Designer" }
+{ "_id" : ObjectId("62a8664f5b91129c5187a594"), "name" : "Raju", "age" : 29, "email" : "Raju@gps.com", "salary" : 6000, "dept" : "Tester" }
+{ "_id" : ObjectId("62a8666f5b91129c5187a595"), "name" : "Manu", "age" : 29, "email" : "Manu@gps.com", "salary" : 5000, "dept" : "Designer" }
+{ "_id" : ObjectId("62a866a05b91129c5187a596"), "name" : "Ram", "age" : 31, "email" : "Ram@gps.com", "salary" : 4500, "dept" : "Tester" }
+> db.Empdetails.aggregate([{$group:{_id:"$dept","Avg_salary":{$avg:"$salary"}}}])
+{ "_id" : "Designer", "Avg_salary" : 4500 }
+{ "_id" : "Developer", "Avg_salary" : 5000 }
+{ "_id" : "Tester", "Avg_salary" : 5250 }
+> db.Empdetails.aggregate([{$group:{_id:"$dept","Min_salary":{$min:"$salary"}}}])
+{ "_id" : "Designer", "Min_salary" : 4000 }
+{ "_id" : "Developer", "Min_salary" : 5000 }
+{ "_id" : "Tester", "Min_salary" : 4500 }
+> db.Empdetails.aggregate([{$group:{_id:"$dept","Max_salary":{$max:"$salary"}}}])
+{ "_id" : "Designer", "Max_salary" : 5000 }
+{ "_id" : "Developer", "Max_salary" : 5000 }
+{ "_id" : "Tester", "Max_salary" : 6000 }
+> db.Empdetails.find().sort({name:-1})
+{ "_id" : ObjectId("62a866a05b91129c5187a596"), "name" : "Ram", "age" : 31, "email" : "Ram@gps.com", "salary" : 4500, "dept" : "Tester" }
+{ "_id" : ObjectId("62a8664f5b91129c5187a594"), "name" : "Raju", "age" : 29, "email" : "Raju@gps.com", "salary" : 6000, "dept" : "Tester" }
+{ "_id" : ObjectId("62a866185b91129c5187a593"), "name" : "Mohan", "age" : 32, "email" : "neil@gps.com", "salary" : 4000, "dept" : "Designer" }
+{ "_id" : ObjectId("62a8666f5b91129c5187a595"), "name" : "Manu", "age" : 29, "email" : "Manu@gps.com", "salary" : 5000, "dept" : "Designer" }
+{ "_id" : ObjectId("62a865d35b91129c5187a592"), "name" : "Bhuvan", "age" : 30, "email" : "bhuvan@gps.com", "salary" : 5000, "dept" : "Developer" }
+> db.Empdetails.createIndex({name:"text"})
+{
+	"createdCollectionAutomatically" : false,
+	"numIndexesBefore" : 1,
+	"numIndexesAfter" : 2,
+	"ok" : 1
+}
+> db.Empdetails.find()
+{ "_id" : ObjectId("62a865d35b91129c5187a592"), "name" : "Bhuvan", "age" : 30, "email" : "bhuvan@gps.com", "salary" : 5000, "dept" : "Developer" }
+{ "_id" : ObjectId("62a866185b91129c5187a593"), "name" : "Mohan", "age" : 32, "email" : "neil@gps.com", "salary" : 4000, "dept" : "Designer" }
+{ "_id" : ObjectId("62a8664f5b91129c5187a594"), "name" : "Raju", "age" : 29, "email" : "Raju@gps.com", "salary" : 6000, "dept" : "Tester" }
+{ "_id" : ObjectId("62a8666f5b91129c5187a595"), "name" : "Manu", "age" : 29, "email" : "Manu@gps.com", "salary" : 5000, "dept" : "Designer" }
+{ "_id" : ObjectId("62a866a05b91129c5187a596"), "name" : "Ram", "age" : 31, "email" : "Ram@gps.com", "salary" : 4500, "dept" : "Tester" }
+> 
+
