@@ -1,0 +1,37 @@
+MariaDB [devika]> create database cmpny;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [devika]> use cmpny
+Database changed
+MariaDB [cmpny]> create table jobs(job_id int primary key,job_title varchar(10),min_salary int,max_salary int);
+Query OK, 0 rows affected (0.25 sec)
+
+MariaDB [cmpny]> create table employees(employee_id int primary key,first_name varchar(10),last_name(varchar(10),email varchar(10),phone_number int,hire_date date,job_id int,salary int,manager_id,department_id int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '(varchar(10),email varchar(10),phone_number int,hire_date date,job_id int,salary' at line 1
+MariaDB [cmpny]> create table employees(employee_id int primary key,first_name varchar(10),last_name varchar(10),email varchar(10),phone_number int,hire_date date,job_id int,salary int,manager_id,department_id int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'department_id int)' at line 1
+MariaDB [cmpny]>  create table employees(employee_id int primary key,first_name varchar(10),last_name varchar(10),email varchar(10),phone_number int,hire_date date,job_id int,salary int,manager_id int,department_id int);
+Query OK, 0 rows affected (0.27 sec)
+
+MariaDB [cmpny]> create table departments(department_id primary key,department_name varchar(10));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'primary key,department_name varchar(10))' at line 1
+MariaDB [cmpny]> create table departments(department_id int primary key,department_name varchar(10));
+Query OK, 0 rows affected (0.28 sec)
+insert into jobs values(2013,'manager',50000,100000),(2015,'supervisor',30000,40000),(2016,'analyser',10000,25000),(2014,'accountant',35000,45000),(2018,'dephead',45000,49000);
+Query OK, 5 rows affected (0.44 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [cmpny]> select * from jobs;
++--------+------------+------------+------------+
+| job_id | job_title  | min_salary | max_salary |
++--------+------------+------------+------------+
+|   2013 | manager    |      50000 |     100000 |
+|   2014 | accountant |      35000 |      45000 |
+|   2015 | supervisor |      30000 |      40000 |
+|   2016 | analyser   |      10000 |      25000 |
+|   2018 | dephead    |      45000 |      49000 |
++--------+------------+------------+------------+
+5 rows in set (0.00 sec)
+
+insert into employees values(1,'devika','pramod','@email.com',6734764891,14-12-2000,2013,80000,202,2019),(2,'gopika','pramod','@email.com',8997645328,14-12-2000,2014,40000,203,2020),(3,'niveditha','pramod','@email.com',9961725402,27-10-2005,2015,40000,204,2021),(
+

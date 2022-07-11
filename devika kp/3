@@ -1,0 +1,111 @@
+create table clientmaster1(clientno varchar(5),client_name varchar(50),address varchar(50),city varchar(50),pincode int,state varchar(50));
+Query OK, 0 rows affected (0.27 sec)
+insert into clientmaster1 values('c0199','Abhishek','kizhakkuvtl','kochi',345673,'kerala'),('c0201','jaya','thekkepadam','marine',678543,'tamilnadu'),('c0202','nivya','palliparambil','kodungallur',682508,'kerala'),('c0203','nandhana','kudukkal','vypin',567843,'karnataka'),('co204','keerthy','vatteparambil','manakkal',123496,'telungana');
+Query OK, 5 rows affected (0.04 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [devika]> select * from clientmaster1;
++----------+-------------+---------------+-------------+---------+-----------+
+| clientno | client_name | address       | city        | pincode | state     |
++----------+-------------+---------------+-------------+---------+-----------+
+| c0199    | Abhishek    | kizhakkuvtl   | kochi       |  345673 | kerala    |
+| c0201    | jaya        | thekkepadam   | marine      |  678543 | tamilnadu |
+| c0202    | nivya       | palliparambil | kodungallur |  682508 | kerala    |
+| c0203    | nandhana    | kudukkal      | vypin       |  567843 | karnataka |
+| co204    | keerthy     | vatteparambil | manakkal    |  123496 | telungana |
++----------+-------------+---------------+-------------+---------+-----------+
+5 rows in set (0.00 sec)
+
+MariaDB [devika]> insert into clientmaster1 values('c0200','jaya','vattikal','mumbai',683901,'maharashtra');
+Query OK, 1 row affected (0.43 sec)
+
+MariaDB [devika]> select * from clientmaster1;
++----------+-------------+---------------+-------------+---------+-------------+
+| clientno | client_name | address       | city        | pincode | state       |
++----------+-------------+---------------+-------------+---------+-------------+
+| c0199    | Abhishek    | kizhakkuvtl   | kochi       |  345673 | kerala      |
+| c0201    | jaya        | thekkepadam   | marine      |  678543 | tamilnadu   |
+| c0202    | nivya       | palliparambil | kodungallur |  682508 | kerala      |
+| c0203    | nandhana    | kudukkal      | vypin       |  567843 | karnataka   |
+| co204    | keerthy     | vatteparambil | manakkal    |  123496 | telungana   |
+| c0200    | jaya        | vattikal      | mumbai      |  683901 | maharashtra |
++----------+-------------+---------------+-------------+---------+-------------+
+6 rows in set (0.00 sec)
+
+MariaDB [devika]> select clientno,client_name from clientmaster1;
++----------+-------------+
+| clientno | client_name |
++----------+-------------+
+| c0199    | Abhishek    |
+| c0201    | jaya        |
+| c0202    | nivya       |
+| c0203    | nandhana    |
+| co204    | keerthy     |
+| c0200    | jaya        |
++----------+-------------+
+6 rows in set (0.00 sec)
+
+MariaDB [devika]> select distinct(client_name)from clientmaster1;
++-------------+
+| client_name |
++-------------+
+| Abhishek    |
+| jaya        |
+| nivya       |
+| nandhana    |
+| keerthy     |
++-------------+
+5 rows in set (0.00 sec)
+
+MariaDB [devika]> select clientno,client_name,address,city from clientmaster1 orderby clientno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'clientno' at line 1
+MariaDB [devika]> select clientno,client_name,address,city from clientmaster1 order by clientno ;
++----------+-------------+---------------+-------------+
+| clientno | client_name | address       | city        |
++----------+-------------+---------------+-------------+
+| c0199    | Abhishek    | kizhakkuvtl   | kochi       |
+| c0200    | jaya        | vattikal      | mumbai      |
+| c0201    | jaya        | thekkepadam   | marine      |
+| c0202    | nivya       | palliparambil | kodungallur |
+| c0203    | nandhana    | kudukkal      | vypin       |
+| co204    | keerthy     | vatteparambil | manakkal    |
++----------+-------------+---------------+-------------+
+6 rows in set (0.00 sec)
+
+MariaDB [devika]> select clientno,client_name,address,city from clientmaster1 order by clientno desc;
++----------+-------------+---------------+-------------+
+| clientno | client_name | address       | city        |
++----------+-------------+---------------+-------------+
+| co204    | keerthy     | vatteparambil | manakkal    |
+| c0203    | nandhana    | kudukkal      | vypin       |
+| c0202    | nivya       | palliparambil | kodungallur |
+| c0201    | jaya        | thekkepadam   | marine      |
+| c0200    | jaya        | vattikal      | mumbai      |
+| c0199    | Abhishek    | kizhakkuvtl   | kochi       |
++----------+-------------+---------------+-------------+
+6 rows in set (0.00 sec)
+
+MariaDB [devika]> alter table clientmaster1 add(telno int,faxno int);
+Query OK, 0 rows affected (0.39 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [devika]> select * from clientmaster1;
++----------+-------------+---------------+-------------+---------+-------------+-------+-------+
+| clientno | client_name | address       | city        | pincode | state       | telno | faxno |
++----------+-------------+---------------+-------------+---------+-------------+-------+-------+
+| c0199    | Abhishek    | kizhakkuvtl   | kochi       |  345673 | kerala      |  NULL |  NULL |
+| c0201    | jaya        | thekkepadam   | marine      |  678543 | tamilnadu   |  NULL |  NULL |
+| c0202    | nivya       | palliparambil | kodungallur |  682508 | kerala      |  NULL |  NULL |
+| c0203    | nandhana    | kudukkal      | vypin       |  567843 | karnataka   |  NULL |  NULL |
+| co204    | keerthy     | vatteparambil | manakkal    |  123496 | telungana   |  NULL |  NULL |
+| c0200    | jaya        | vattikal      | mumbai      |  683901 | maharashtra |  NULL |  NULL |
++----------+-------------+---------------+-------------+---------+-------------+-------+-------+
+6 rows in set (0.00 sec)
+
+MariaDB [devika]> alter table clientmaster1 modify(faxno varchar(50));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '(faxno varchar(50))' at line 1
+MariaDB [devika]> alter table clientmaster1 modify faxno varchar(50);
+Query OK, 6 rows affected (1.06 sec)               
+Records: 6  Duplicates: 0  Warnings: 0
+
+

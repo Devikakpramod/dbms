@@ -1,0 +1,69 @@
+Database changed
+MariaDB [devika]> insert into Employee values(1,'Angelina','chicago',200000,30),(2,'Robert','Austin',300000,26),(3,'Christian','Denver',100000,42),(4,'Kristen','Washington',500000,29),(5,'Russell','Los angels',200000,36),(6,'Marry','Canada',600000,48);
+Query OK, 6 rows affected (0.05 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+MariaDB [devika]> select * from Employee;
++--------+-----------+------------+--------+------+
+| Emp_id | Emp_name  | City       | Salary | Age  |
++--------+-----------+------------+--------+------+
+|      1 | Angelina  | chicago    | 200000 |   30 |
+|      2 | Robert    | Austin     | 300000 |   26 |
+|      3 | Christian | Denver     | 100000 |   42 |
+|      4 | Kristen   | Washington | 500000 |   29 |
+|      5 | Russell   | Los angels | 200000 |   36 |
+|      6 | Marry     | Canada     | 600000 |   48 |
++--------+-----------+------------+--------+------+
+6 rows in set (0.00 sec)
+
+MariaDB [devika]> create table Project(Project_no int,Emp_id int,Department varchar(20));
+Query OK, 0 rows affected (0.67 sec)
+
+MariaDB [devika]> insert into Project values(101,1,'Testing'),(102,2,'Development'),(103,3,'Designing'),(104,4,'Development');
+Query OK, 4 rows affected (0.03 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [devika]> select * from Project;
++------------+--------+-------------+
+| Project_no | Emp_id | Department  |
++------------+--------+-------------+
+|        101 |      1 | Testing     |
+|        102 |      2 | Development |
+|        103 |      3 | Designing   |
+|        104 |      4 | Development |
++------------+--------+-------------+
+MariaDB [devika]> select Employee.Emp_name,Project.Department from Employee inner join Project on Employee.Emp_id=Project.Emp_id;
++-----------+-------------+
+| Emp_name  | Department  |
++-----------+-------------+
+| Angelina  | Testing     |
+| Robert    | Development |
+| Christian | Designing   |
+| Kristen   | Development |
++-----------+-------------+
+4 rows in set (0.00 sec)
+
+MariaDB [devika]> select Employee.Emp_name,Project.Department from Employee left join Project on Employee.Emp_id=Project.Emp_id;
++-----------+-------------+
+| Emp_name  | Department  |
++-----------+-------------+
+| Angelina  | Testing     |
+| Robert    | Development |
+| Christian | Designing   |
+| Kristen   | Development |
+| Russell   | NULL        |
+| Marry     | NULL        |
++-----------+-------------+
+6 rows in set (0.00 sec)
+
+MariaDB [devika]> select Employee.Emp_name,Project.Department from Employee right join Project on Employee.Emp_id=Project.Emp_id;
++-----------+-------------+
+| Emp_name  | Department  |
++-----------+-------------+
+| Angelina  | Testing     |
+| Robert    | Development |
+| Christian | Designing   |
+| Kristen   | Development |
++-----------+-------------+
+4 rows in set (0.00 sec)
+

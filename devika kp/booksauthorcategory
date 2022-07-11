@@ -1,0 +1,82 @@
+create table Author(ID int primary key,A_name varchar(20),City varchar(20),Country varchar(20));
+Query OK, 0 rows affected (0.64 sec)
+
+
+MariaDB [devika]> insert into Author values(1,'ravi','cochi','india'),(2,'rohini','bangalore','india'),(3,'swathika','hyderabad','india'),(4,'reshmika','kodak','india'),(5,'arjun','andhra','india');
+Query OK, 5 rows affected (0.04 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+
+MariaDB [devika]> create table category(id int primary key,decsription varchar(20));
+Query OK, 0 rows affected (0.66 sec)
+
+
+MariaDB [devika]> insert into category values(1,'romance'),(2,'biography'),(3,'humour'),(4,'nonfiction'),(5,'fiction');
+Query OK, 5 rows affected (0.42 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+
+
+MariaDB [devika]> create table books(bk_id int primary key,title varchar(50),author_id int,publisher_id int,category_id int,year date,price int);
+Query OK, 0 rows affected (0.62 sec)
+
+MariaDB [devika]> insert into books values(200,'alice&james',1,100,1,'1996',500),(201,'karma',2,101,2,'1997',689),(202,'rani',3,102,3,'1998',780),(203,'godalives',4,103,4,'2005',910),(204,'vrindhavan',5,104,5,'2000',350);
+Query OK, 5 rows affected, 5 warnings (0.03 sec)
+Records: 5  Duplicates: 0  Warnings: 5
+
+MariaDB [devika]> select * from Author;
++----+----------+-----------+---------+
+| ID | A_name   | City      | Country |
++----+----------+-----------+---------+
+|  1 | ravi     | cochi     | india   |
+|  2 | rohini   | bangalore | india   |
+|  3 | swathika | hyderabad | india   |
+|  4 | reshmika | kodak     | india   |
+|  5 | arjun    | andhra    | india   |
++----+----------+-----------+---------+
+5 rows in set (0.00 sec)
+
+MariaDB [devika]> select * from category;
++----+-------------+
+| id | decsription |
++----+-------------+
+|  1 | romance     |
+|  2 | biography   |
+|  3 | humour      |
+|  4 | nonfiction  |
+|  5 | fiction     |
++----+-------------+
+5 rows in set (0.00 sec)
+
+
+MariaDB [devika]> create table books(bk_id int primary key,title varchar(50),author_id int,publisher_id int,category_id int,year date,price int);
+Query OK, 0 rows affected (0.24 sec)
+
+MariaDB [devika]>  insert into books values(200,'alice&james',1,100,1,'1996-9-20',500),(201,'karma',2,101,2,'1997-13-8',689),(202,'rani',3,102,3,'1998-11-12',780),(203,'godalives',4,103,4,'2005-10-27',910),(204,'vrindhavan',5,104,5,'2000-14-12',350);
+Query OK, 5 rows affected, 2 warnings (0.04 sec)
+Records: 5  Duplicates: 0  Warnings: 2
+
+MariaDB [devika]> select * from books;
++-------+-------------+-----------+--------------+-------------+------------+-------+
+| bk_id | title       | author_id | publisher_id | category_id | year       | price |
++-------+-------------+-----------+--------------+-------------+------------+-------+
+|   200 | alice&james |         1 |          100 |           1 | 1996-09-20 |   500 |
+|   201 | karma       |         2 |          101 |           2 | 0000-00-00 |   689 |
+|   202 | rani        |         3 |          102 |           3 | 1998-11-12 |   780 |
+|   203 | godalives   |         4 |          103 |           4 | 2005-10-27 |   910 |
+|   204 | vrindhavan  |         5 |          104 |           5 | 0000-00-00 |   350 |
++-------+-------------+-----------+--------------+-------------+------------+-------+
+5 rows in set (0.00 sec)
+
+MariaDB [devika]> select bk_id,title,price from books;
++-------+-------------+-------+
+| bk_id | title       | price |
++-------+-------------+-------+
+|   200 | alice&james |   500 |
+|   201 | karma       |   689 |
+|   202 | rani        |   780 |
+|   203 | godalives   |   910 |
+|   204 | vrindhavan  |   350 |
++-------+-------------+-------+
+5 rows in set (0.00 sec)
+
